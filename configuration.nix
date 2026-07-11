@@ -7,7 +7,15 @@
     ];
 
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 5;
   boot.loader.efi.canTouchEfiVariables = true;
+  
+  hardware.cpu.intel.updateMicrocode = true;
+  services.fwupd.enable = true;
+  hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+  };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -37,15 +45,33 @@
       tree
     ];
   };
+  
+  system.autoUpgrade = {
+      enable = true;
+      allowReboot = false;
+      flake = "/home/dennis/dennix#t440p";
+      dates = "daily";
+  };
+
+  nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 3d";
+  };
+
+  nix.optimise = {
+      automatic = true;
+      dates = ["weekly"];
+  };
 
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    vim
     git
     librewolf
     wl-clipboard
-    mako
+    swaynotificationcenter
+    swaylock
     wofi
     kitty
     afetch
@@ -60,7 +86,9 @@
     rose-pine-kvantum
     vimPlugins.rose-pine
     nwg-look
+    nix-search-cli
     libsForQt5.qt5ct
+    libinput
     kdePackages.qt6ct
     spotify
   ];
@@ -68,13 +96,21 @@
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
   ];
 
-  programs.sway.enable = true;
+  programs.sway = {
+    enable = true;
+    package = pkgs.swayfx;
+  };
 
   programs.zsh.enable = true;
 
-  programs.steam.enable = true;  
+  programs.steam.enable = true;
+
+  programs.regreet.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
