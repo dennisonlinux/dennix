@@ -4,24 +4,18 @@
     home.username = "dennis";
     home.homeDirectory = "/home/dennis";
     home.stateVersion = "26.05";
-
-    wayland.windowManager.sway = {
+    
+    programs.quickshell = {
       enable = true;
-      package = pkgs.swayfx;
-      
-      checkConfig = false;
-
-      config = {
-        modifier = "Mod4";
-        terminal = "kitty";
-      };
-
-      extraConfig = ''
-        shadows enable
-        blur enable
-        blur_passes 3
-    '';
+      package = pkgs.quickshell;
+    };
+    home.sessionVariables = {
+      QML2_IMPORT_PATH = "$HOME/.nix-profile/lib/qt-6/qml:$HOME/.nix-profile/lib/qt-5/qml:/run/current-system/sw/lib/qt-6/qml:/run/current-system/sw/lib/qt-5/qml\${QML2_IMPORT_PATH:+:\$QML2_IMPORT_PATH}";
   };
+    qt = {
+      enable = true;
+      platformTheme.name = "qtct"; 
+    };
 
     programs.zsh = {
        enable = true;
@@ -34,15 +28,20 @@
        };
        enableAutosuggestions = true;
        enableCompletion = true;
-       initExtra = ''
+       initContent = ''
          prompt off
 
          setopt PROMPT_SUBST
 
-         PROMPT="[%F{blue}%f] [%F{green}%n%f@%F{cyan}%m%f] in [%F{yellow}%~%f]
-         %F{magenta}>%f "
+         PROMPT="[%F{blue}%f] [%F{cyan}%n%f@%F{blue}%m%f] in [%F{cyan}%~%f]
+         %F{blue}>%f "
+
+         nitch
        '';
-   };
+     };
+
+     wayland.windowManager.hyprland.systemd.variables = ["--all"];
+
 
    programs.vim = {
        enable = true;

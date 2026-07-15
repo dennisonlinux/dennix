@@ -1,0 +1,36 @@
+# vim:fileencoding=utf-8:foldmethod=marker
+
+background #0a0f1d
+foreground #d1d5db
+cursor #ff6b00
+selection_background #1e293b
+selection_foreground #ffffff
+
+active_tab_background #ff6b00
+inactive_tab_background #141b2d
+active_tab_foreground #0a0f1d
+inactive_tab_foreground #64748b
+
+color0 #0a0f1d
+color8 #141b2d
+
+color1 #e65100
+color9 #ff6b00
+
+color2 #10b981
+color10 #34d399
+
+color3 #f59e0b
+color11 #fbbf24
+
+color4 #2563eb
+color12 #60a5fa
+
+color5 #d946ef
+color13 #f472b6
+
+color6 #06b6d4
+color14 #22d3ee
+
+color7 #cbd5e1
+color15 #ffffff

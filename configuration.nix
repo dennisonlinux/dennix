@@ -36,6 +36,18 @@
   };
 
   services.libinput.enable = true;
+  
+  stylix = {
+    enable = true;
+    base16Scheme =  "${pkgs.base16-schemes}/share/themes/gruvbox-dark-soft.yaml";
+    polarity = "dark";
+    fonts = {
+      monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font Mono";
+      };
+    };
+  };
 
   users.users.dennis = {
     isNormalUser = true;
@@ -68,29 +80,36 @@
 
   environment.systemPackages = with pkgs; [
     git
-    librewolf
+    vivaldi
     wl-clipboard
-    swaynotificationcenter
-    swaylock
+    hyprlock
+    hyprcursor
+    swaybg
+    grim
+    slurp
     wofi
     kitty
-    afetch
+    brightnessctl
+    nitch
     cava
     cmatrix
     cbonsai
     bluetui
     nemo
-    rose-pine-gtk-theme
-    rose-pine-icon-theme
-    rose-pine-cursor
-    rose-pine-kvantum
-    vimPlugins.rose-pine
+    gruvbox-dark-gtk
+    gruvbox-dark-icons-gtk
+    gruvbox-kvantum
+    quickshell
+    vimPlugins.gruvbox
+    libnotify
     nwg-look
     nix-search-cli
+    xcur2png
     libsForQt5.qt5ct
     libinput
     kdePackages.qt6ct
     spotify
+    playerctl
   ];
 
   fonts.packages = with pkgs; [
@@ -101,16 +120,11 @@
     noto-fonts-color-emoji
   ];
 
-  programs.sway = {
-    enable = true;
-    package = pkgs.swayfx;
-  };
+  programs.hyprland.enable = true;
 
   programs.zsh.enable = true;
 
   programs.steam.enable = true;
-
-  programs.regreet.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
